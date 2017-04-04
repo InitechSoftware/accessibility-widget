@@ -1,0 +1,35 @@
+{
+  "name": "accessibility-plugin",
+  "version": "0.0.1",
+  "description": "A JavaScript accessibility plugin that provides aid in viewing content on websites. According to new Israeli laws, every website that provides any type of service is required to add an accessability plugin. Support Hebrew and English (initialy).",
+  "main": "index.js",
+  "scripts": {
+    "start": "node_modules/webpack-dev-server/bin/webpack-dev-server.js --progres --inline --hot --port 9090 --config webpack.dev.config.js",
+    "build": "node_modules/webpack/bin/webpack.js --progres --profile --config webpack.prod.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "accessibility",
+    "impaired",
+    "disability"
+  ],
+  "author": "Initech LTD",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "base64-inline-loader": "0.0.2",
+    "css-loader": "^0.26.1",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.26.0",
+    "json-loader": "^0.5.4",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  }
+}

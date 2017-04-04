@@ -1,0 +1,18 @@
+{
+    "accessibility_text": "Accessibility",
+    "accessibility_alt": "Accessibility",
+    "font_resize_text": "Font Resize",
+    "font_resize_alt": "Font Resize",
+    "contrast_low_text": "Low Contrast",
+    "contrast_low_alt": "Low Contrast",
+    "contrast_high_text": "High Contrast",
+    "contrast_high_alt": "High Contrast",
+    "links_underline_text": "Undeline Links",
+    "links_underline_alt": "Undeline Links",
+    "animation_block_text": "Block Animations",
+    "animation_block_alt": "Block Animations",
+    "readable_font_text": "Redable Fonts",
+    "readable_font_alt": "Redable Fonts",
+    "reset_configuration_text": "Reset Configuration",
+    "reset_configuration_alt": "Reset Configuration"
+}
