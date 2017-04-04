@@ -15,14 +15,6 @@
     "type": "img",
     "path": "#accessibility-plugin > .control#font > img"
   },
-  "contrast_low_text": {
-    "type": "span",
-    "path": "#accessibility-plugin > .control#contrast-low > span"
-  },
-  "contrast_low_alt": {
-    "type": "img",
-    "path": "#accessibility-plugin > .control#contrast-low > img"
-  },
   "contrast_high_text": {
     "type": "span",
     "path": "#accessibility-plugin > .control#contrast-high > span"
@@ -49,11 +41,11 @@
   },
   "readable_font_text": {
     "type": "span",
-    "path": "#accessibility-plugin > .control#redable > span"
+    "path": "#accessibility-plugin > .control#readable > span"
   },
   "readable_font_alt": {
     "type": "img",
-    "path": "#accessibility-plugin > .control#redable > img"
+    "path": "#accessibility-plugin > .control#readable > img"
   },
   "reset_configuration_text": {
     "type": "span",

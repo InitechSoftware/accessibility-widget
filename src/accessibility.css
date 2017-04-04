@@ -20,6 +20,7 @@
 
 .accessibility-wrapper > .accessibility-tab {
   position: absolute;
+  cursor: pointer;
   height: 40px;
   width: 40px;
   top: -1px;
@@ -86,9 +87,6 @@
 body.enlarge-font {
   font-size: 150% !important;
 }
-
-/* TODO: What todo here? */
-/*body.low-contrast {}*/
 
 body.high-contrast {
   background: #000000 !important;

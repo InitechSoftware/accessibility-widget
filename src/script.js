@@ -68,7 +68,7 @@ class AccessibilityPlugin {
     }
   }
 
-  translate(translationObject, dir="ltr") {
+  translate(translationObject) {
     if (Object.keys(translationObject) === 0) {
       throw new Error(`Argument translationObject should be an object with keys`);
     }
