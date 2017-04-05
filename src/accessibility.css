@@ -1,7 +1,7 @@
 /*defaults*/
-.accessibility-wrapper h1, .accessibility-wrapper h2, .accessibility-wrapper h3, .accessibility-wrapper h4, .accessibility-wrapper h5, .accessibility-wrapper h6 {margin: 0;padding: 0;font-weight: normal;font-family: Arial, Helvetica, sans-serif;}.accessibility-wrapper p, .accessibility-wrapper th, .accessibility-wrapper td, .accessibility-wrapper li, .accessibility-wrapper dd, .accessibility-wrapper dt, .accessibility-wrapper ul, .accessibility-wrapper ol, .accessibility-wrapper blockquote, .accessibility-wrapper q, .accessibility-wrapper acronym, .accessibility-wrapper abbr, .accessibility-wrapper a, .accessibility-wrapper input, .accessibility-wrapper select, .accessibility-wrapper textarea {margin: 0;padding: 0;font: normal normal normal 1em/1.25 Arial, Helvetica, sans-serif;}.accessibility-wrapper blockquote {margin: 1.25em;padding: 1.25em;}.accessibility-wrapper q {font-style: italic;}.accessibility-wrapper acronym, .accessibility-wrapper abbr {cursor: help;border-bottom: 1px dashed;}.accessibility-wrapper small {font-size: .85em;}.accessibility-wrapper big {font-size: 1.2em;}.accessibility-wrapper a, .accessibility-wrapper a:link, .accessibility-wrapper a:visited, .accessibility-wrapper a:active, .accessibility-wrapper a:hover {text-decoration: underline;}.accessibility-wrapper img {border: none;}.accessibility-wrapper table {margin: 0;padding: 0;border: none;}.accessibility-wrapper form {margin: 0;padding: 0;display: inline;}.accessibility-wrapper label {cursor: pointer;} .accessibility-wrapper *, *:before, *:after {box-sizing: border-box;}
+.accessibility-plugin_wrapper h1, .accessibility-plugin_wrapper h2, .accessibility-plugin_wrapper h3, .accessibility-plugin_wrapper h4, .accessibility-plugin_wrapper h5, .accessibility-plugin_wrapper h6 {margin: 0;padding: 0;font-weight: normal;font-family: Arial, Helvetica, sans-serif;}.accessibility-plugin_wrapper p, .accessibility-plugin_wrapper th, .accessibility-plugin_wrapper td, .accessibility-plugin_wrapper li, .accessibility-plugin_wrapper dd, .accessibility-plugin_wrapper dt, .accessibility-plugin_wrapper ul, .accessibility-plugin_wrapper ol, .accessibility-plugin_wrapper blockquote, .accessibility-plugin_wrapper q, .accessibility-plugin_wrapper acronym, .accessibility-plugin_wrapper abbr, .accessibility-plugin_wrapper a, .accessibility-plugin_wrapper input, .accessibility-plugin_wrapper select, .accessibility-plugin_wrapper textarea {margin: 0;padding: 0;font: normal normal normal 1em/1.25 Arial, Helvetica, sans-serif;}.accessibility-plugin_wrapper blockquote {margin: 1.25em;padding: 1.25em;}.accessibility-plugin_wrapper q {font-style: italic;}.accessibility-plugin_wrapper acronym, .accessibility-plugin_wrapper abbr {cursor: help;border-bottom: 1px dashed;}.accessibility-plugin_wrapper small {font-size: .85em;}.accessibility-plugin_wrapper big {font-size: 1.2em;}.accessibility-plugin_wrapper a, .accessibility-plugin_wrapper a:link, .accessibility-plugin_wrapper a:visited, .accessibility-plugin_wrapper a:active, .accessibility-plugin_wrapper a:hover {text-decoration: underline;}.accessibility-plugin_wrapper img {border: none;}.accessibility-plugin_wrapper table {margin: 0;padding: 0;border: none;}.accessibility-plugin_wrapper form {margin: 0;padding: 0;display: inline;}.accessibility-plugin_wrapper label {cursor: pointer;} .accessibility-plugin_wrapper *, *:before, *:after {box-sizing: border-box;}
 
-.accessibility-wrapper {
+.accessibility-plugin_wrapper {
   position: fixed;
   top: 45%;
   height: auto;
@@ -14,11 +14,11 @@
   background: #FFF;
 }
 
-.accessibility-wrapper.open {
+.accessibility-plugin_wrapper.open {
   left: 0px;
 }
 
-.accessibility-wrapper > .accessibility-tab {
+.accessibility-plugin_wrapper > .accessibility-plugin_tab {
   position: absolute;
   cursor: pointer;
   height: 40px;
@@ -27,112 +27,66 @@
   right: -40px;
 }
 
-.accessibility-wrapper > .accessibility-tab > img {
+.accessibility-plugin_wrapper > .accessibility-plugin_tab > .accessibility-plugin_img {
   height: 100%;
   width: 100%;
   text-align: center;
   background: #4157AF !important;
 }
 
-.accessibility-wrapper > h3 {
+.accessibility-plugin_wrapper > .accessibility-plugin_header {
   text-align: center;
 }
 
-.accessibility-wrapper > .control {
+.accessibility-plugin_wrapper > .accessibility-plugin_control {
   cursor: pointer;
   overflow: hidden;
   margin: 10px 0;
 }
 
-.accessibility-wrapper > .control > img {
+.accessibility-plugin_wrapper > .accessibility-plugin_control > .accessibility-plugin_img {
   display: block;
 }
 
-.accessibility-wrapper > .control > span {
+.accessibility-plugin_wrapper > .accessibility-plugin_control > .accessibility-plugin_text {
   display: block;
   line-height: 22px;
 }
 
-.accessibility-wrapper[dir="rtl"] {
+.accessibility-plugin_wrapper[dir="rtl"] {
   left: initial;
   right: -280px;
 }
 
-.accessibility-wrapper[dir="rtl"].open {
+.accessibility-plugin_wrapper[dir="rtl"].open {
   right: 0px;
 }
 
-.accessibility-wrapper[dir="rtl"] .accessibility-tab {
+.accessibility-plugin_wrapper[dir="rtl"] .accessibility-plugin_tab {
   right: initial;
   left: -40px;
 }
 
-.accessibility-wrapper[dir="ltr"] > .control > img {
+.accessibility-plugin_wrapper[dir="ltr"] > .accessibility-plugin_control > .accessibility-plugin_img {
   float: right;
 }
 
-.accessibility-wrapper[dir="ltr"] > .control > span {
+.accessibility-plugin_wrapper[dir="ltr"] > .accessibility-plugin_control > .accessibility-plugin_text {
   float: left;
 }
 
-.accessibility-wrapper[dir="rtl"] > .control > img {
+.accessibility-plugin_wrapper[dir="rtl"] > .accessibility-plugin_control > .accessibility-plugin_img {
   float: left;
 }
 
-.accessibility-wrapper[dir="rtl"] > .control > span {
+.accessibility-plugin_wrapper[dir="rtl"] > .accessibility-plugin_control > .accessibility-plugin_text {
   float: right;
 }
 
-/*  ACCESSIBILITY STYLING */
-body.enlarge-font {
-  font-size: 150% !important;
-}
-
-body.high-contrast {
-  background: #000000 !important;
-  color: rgb(30, 255, 35) !important;
-}
-
-body.high-contrast .accessibility-wrapper {
+body.high-contrast .accessibility-plugin_wrapper {
   background: #000000 !important;
 }
 
-body.high-contrast .accessibility-wrapper img {
+body.high-contrast .accessibility-plugin_wrapper img {
   background: #FFF;
-}
-
-body.high-contrast {
-  background: #000000 !important;
-  color: rgb(30, 255, 35) !important;
-}
-
-
-body.underline-links a {
-  text-decoration: underline !important;
-}
-
-/* From https://dev.webonomic.nl/how-to-disable-css-transforms-transistions-and-animations */
-body.disable-animations * {
-  /*CSS transitions*/
-  -o-transition-property: none !important;
-  -moz-transition-property: none !important;
-  -ms-transition-property: none !important;
-  -webkit-transition-property: none !important;
-  transition-property: none !important;
-  /*CSS transforms*/
-  -o-transform: none !important;
-  -moz-transform: none !important;
-  -ms-transform: none !important;
-  -webkit-transform: none !important;
-  transform: none !important;
-  /*CSS animations*/
-  -webkit-animation: none !important;
-  -moz-animation: none !important;
-  -o-animation: none !important;
-  -ms-animation: none !important;
-  animation: none !important;
-}
-
-body.readable-font * {
-  font-family: initial !important;
 }

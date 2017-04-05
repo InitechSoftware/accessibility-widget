@@ -1,0 +1,58 @@
+{
+  "accessibility_text": {
+    "type": "span",
+    "path": "#accessibility-plugin > .accessibility-plugin_header"
+  },
+  "accessibility_alt": {
+    "type": "img",
+    "path": "#accessibility-plugin > .accessibility-plugin_tab > .accessibility-plugin_img"
+  },
+  "font_resize_text": {
+    "type": "span",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#font > .accessibility-plugin_text"
+  },
+  "font_resize_alt": {
+    "type": "img",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#font > .accessibility-plugin_img"
+  },
+  "contrast_high_text": {
+    "type": "span",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#contrast-high > .accessibility-plugin_text"
+  },
+  "contrast_high_alt": {
+    "type": "img",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#contrast-high > .accessibility-plugin_img"
+  },
+  "links_underline_text": {
+    "type": "span",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#links > .accessibility-plugin_text"
+  },
+  "links_underline_alt": {
+    "type": "img",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#links > .accessibility-plugin_img"
+  },
+  "animation_block_text": {
+    "type": "span",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#animation > .accessibility-plugin_text"
+  },
+  "animation_block_alt": {
+    "type": "img",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#animation > .accessibility-plugin_img"
+  },
+  "readable_font_text": {
+    "type": "span",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#readable > .accessibility-plugin_text"
+  },
+  "readable_font_alt": {
+    "type": "img",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#readable > .accessibility-plugin_img"
+  },
+  "reset_configuration_text": {
+    "type": "span",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#reset > .accessibility-plugin_text"
+  },
+  "reset_configuration_alt": {
+    "type": "img",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#reset > .accessibility-plugin_img"
+  }
+}

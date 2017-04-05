@@ -1,6 +1,7 @@
 import html from "./accessibility.html";
-import styles from "./accessibility.css";
-import translationKeys from "./translation-keys.json";
+import AccessibilityStyle from "./accessibility.css";
+import translationKeys from "./configs/translation-keys.json";
+import OverrideStyles from "./configs/class.styles.json";
 import {configHebrew, configEnglish} from "./configs/default.config";
 
 
@@ -10,6 +11,7 @@ class AccessibilityPlugin {
   constructor(config) {
     let savedClasses = window.localStorage.getItem(localStorageKey);
 
+    this.documentReady;
     this._pluginElement = document.createRange().createContextualFragment(html);
     this._translationKeys = translationKeys;
     this._savedClasses = (savedClasses !== null) ? JSON.parse(savedClasses) : [];
@@ -22,16 +24,27 @@ class AccessibilityPlugin {
       "readable-font"
     ];
 
-    if(config) {
-      setConfig(config);
-    } else {
-      this.translate(configEnglish.translation);
-      this.changeDirection(configEnglish.direction);
-      this.append(configEnglish.appendToElement);
-    }
+    this.constants = {
+      configs: {
+        hebrew: configHebrew,
+        english: configEnglish
+      }
+    };
 
-    if (this._savedClasses.length > 0) {
-      this._savedClasses.forEach((className) => this._setClass(className, true));
+    this._documetnReadyFunc = (fn, config=configEnglish) => {
+      this.setConfig(config);
+      if (this._savedClasses.length > 0) {
+          this._savedClasses.forEach((className) => this._setClass(className, true));
+      }
+
+      if (typeof this.documentReady === 'function') {
+        this.documentReady.bind(this);
+        this.documentReady();
+      }
+    };
+
+    if (window.AccessibilityPlugin !== undefined && typeof window.AccessibilityPlugin === 'AccessibilityPlugin') {
+      return window.AccessibilityPlugin;
     }
   }
   // TODO: Implement appending to element other than `body`
@@ -47,7 +60,7 @@ class AccessibilityPlugin {
     querySelector = (toElement !== null && !!toElement.querySelector) ? `${pluginPath}` : `body > ${pluginPath}`;
     this._pluginElement = document.querySelector(querySelector);
     this._pluginElement.addEventListener("click", this._accessibilityPluginClicked.bind(this));
-    this._pluginElement.querySelector(".accessibility-tab").addEventListener("click", this._openTab.bind(this));
+    this._pluginElement.querySelector(".accessibility-plugin_tab").addEventListener("click", this._openTab.bind(this));
 
     return this;
   }
@@ -105,12 +118,13 @@ class AccessibilityPlugin {
   }
 
   resetConfiguration() {
-    let classList = document.body.classList;
+    this._savedClasses.forEach(
+      (className) => this._setStyle(
+        document.querySelectorAll(OverrideStyles[className].elements), false, OverrideStyles[className].style
+      )
+    );
 
-    for (let className of this._savedClasses) {
-      classList.remove(className);
-    }
-
+    this._savedClasses = [];
     window.localStorage.removeItem(localStorageKey);
     //TODO: Remove hardcoded jQuery test and add a full sweep over third party libraries
     if ("jQuery" in window || "$" in window) {
@@ -131,29 +145,41 @@ class AccessibilityPlugin {
   }
 
   _setClass(classToAdd, fromLocal=false) {
-    let classList = document.body.classList;
+    const styleDef = OverrideStyles[classToAdd];
+    const elements = document.querySelectorAll(styleDef.elements);
 
-    if (classList.contains(classToAdd)) {
-      classList.remove(classToAdd);
+    if (fromLocal === true) {
+      this._setStyle(elements, true, styleDef.style);
+    } else if (this._savedClasses.includes(classToAdd)) {
+      this._setStyle(elements, false, styleDef.style);
       this._savedClasses.splice(this._savedClasses.findIndex((elem) => elem === classToAdd), 1);
-    } else if (fromLocal === true) {
-      classList.add(classToAdd);
     } else {
-      classList.add(classToAdd);
+      this._setStyle(elements, true, styleDef.style);
       this._savedClasses.push(classToAdd);
     }
 
     window.localStorage.setItem(localStorageKey, JSON.stringify(this._savedClasses));
     //TODO: Remove hardcoded jQuery test and add a full sweep over third party libraries
     if ("jQuery" in window) {
-      if (classList.contains("disable-animations")) {
+      if (this._savedClasses.includes("disable-animations")) {
         window.jQuery.fx.off = true;
-      } else if (window.jQuery.fx.off === true && classList.contains("disable-animations") === false) {
+      } else if (window.jQuery.fx.off === true && this._savedClasses.includes("disable-animations") === false) {
         window.jQuery.fx.off = false;
       } else {
         window.jQuery.fx.off = false;
       }
     }
+  }
+
+  _setStyle(elements, add=false, style) {
+    elements.forEach((elem) => {
+      const elementStyle = elem.getAttribute('style') || ''; // Check if the style attr is no null.
+      if (add === true) {
+        elem.setAttribute('style', elementStyle + style);
+      } else {
+        elem.setAttribute('style', elementStyle.replace(style, ''));
+      }
+    });
   }
 
   _openTab() {
@@ -167,20 +193,15 @@ class AccessibilityPlugin {
   }
 }
 
-AccessibilityPlugin.constants = {
-  configs: {
-    hebrew: configHebrew,
-    english: configEnglish
-  }
-};
-
 if ("AccessibilityPlugin" in window) {
   console.error(`
     Property AccessibilityPlugin is already defined on window.
     Please change the name of the added "AccessibilityPlugin" and retry.
   `);
 } else {
-  window.AccessibilityPlugin = AccessibilityPlugin;
+  window.AccessibilityPlugin = new AccessibilityPlugin();
 }
+
+document.addEventListener("DOMContentLoaded", (event) => window.AccessibilityPlugin._documetnReadyFunc());
 
 export default AccessibilityPlugin;
