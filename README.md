@@ -21,6 +21,6 @@ Internationalization
 4. After importing widget to you project you can change translation for widget by calling function translate with desired language.
 ```
     window.AccessibilityPlugin.documentReady = function () {
-        this.changeDirection("rtl").translate(this.constants.configs.hebrew.translation);
+        this.changeDirection("ltr").translate(this.constants.configs.russian.translation);
     };
 ```
