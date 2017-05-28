@@ -10,7 +10,6 @@ const localStorageKey = 'classes';
 class AccessibilityPlugin {
   constructor(config) {
     let savedClasses = window.localStorage.getItem(localStorageKey);
-
     this.documentReady;
     this._pluginElement = document.createRange().createContextualFragment(html);
     this._translationKeys = translationKeys;
@@ -119,9 +118,17 @@ class AccessibilityPlugin {
 
   resetConfiguration() {
     this._savedClasses.forEach(
-      (className) => this._setStyle(
-        document.querySelectorAll(OverrideStyles[className].elements), false, OverrideStyles[className].style
-      )
+      (className) => {
+        OverrideStyles[className].forEach((element) => {
+          if(element.hasOwnProperty('enlarge')){
+            this._enlargeProperty(document.querySelectorAll(element.elements), false, element.enlarge)
+          } else {
+            this._setStyle(
+              document.querySelectorAll(element.elements), false, element.style
+            )
+          }
+        });
+      }
     );
 
     this._savedClasses = [];
@@ -145,16 +152,33 @@ class AccessibilityPlugin {
   }
 
   _setClass(classToAdd, fromLocal=false) {
-    const styleDef = OverrideStyles[classToAdd];
-    const elements = document.querySelectorAll(styleDef.elements);
+    const styleDefs = OverrideStyles[classToAdd];
+    styleDefs.forEach((styleDef) => {
+      const elements = document.querySelectorAll(styleDef.elements);
+      if(styleDef.hasOwnProperty('enlarge')) {
+        if (fromLocal === true) {
+          this._enlargeProperty(elements, true, styleDef.enlarge);
+        } else if (this._savedClasses.includes(classToAdd)) {
+          this._enlargeProperty(elements, false, styleDef.enlarge);
+        } else {
+          this._enlargeProperty(elements, true, styleDef.enlarge);
+        }
+      } else {
+        if (fromLocal === true) {
+          this._setStyle(elements, true, styleDef.style);
+        } else if (this._savedClasses.includes(classToAdd)) {
+          this._setStyle(elements, false, styleDef.style);
+        } else {
+          this._setStyle(elements, true, styleDef.style);
+        }
+      }
+    });
+
 
     if (fromLocal === true) {
-      this._setStyle(elements, true, styleDef.style);
     } else if (this._savedClasses.includes(classToAdd)) {
-      this._setStyle(elements, false, styleDef.style);
       this._savedClasses.splice(this._savedClasses.findIndex((elem) => elem === classToAdd), 1);
     } else {
-      this._setStyle(elements, true, styleDef.style);
       this._savedClasses.push(classToAdd);
     }
 
@@ -171,13 +195,25 @@ class AccessibilityPlugin {
     }
   }
 
+  _enlargeProperty(elements, enlarge=false, attrs_dict) {
+    elements.forEach((elem) => {
+      if(enlarge === true) {
+        const cssAttrValue = parseFloat(window.getComputedStyle(elem).getPropertyValue(attrs_dict['attr']));
+        elem.style.setProperty(attrs_dict['attr'], parseFloat(cssAttrValue) + (parseFloat(cssAttrValue) * attrs_dict['value']) + 'px');
+      } else {
+        elem.style.removeProperty(attrs_dict['attr']);
+      }
+    })
+  }
+
   _setStyle(elements, add=false, style) {
     elements.forEach((elem) => {
-      const elementStyle = elem.getAttribute('style') || ''; // Check if the style attr is no null.
-      if (add === true) {
-        elem.setAttribute('style', elementStyle + style);
-      } else {
-        elem.setAttribute('style', elementStyle.replace(style, ''));
+      for(let key in style) {
+        if(add === true) {
+          elem.style.setProperty(key, style[key]);
+        } else {
+          elem.style.removeProperty(key);
+        }
       }
     });
   }

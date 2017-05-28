@@ -12,10 +12,11 @@
   left: -280px;
   transition: left 0.5s, right 0.5s;
   background: #FFF;
+  z-index: 1;
 }
 
 .accessibility-plugin_wrapper.open {
-  left: 0px;
+  left: 0;
 }
 
 .accessibility-plugin_wrapper > .accessibility-plugin_tab {

@@ -29,7 +29,18 @@
     "json-loader": "^0.5.4",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.14.0",
+    "webpack": "^1.15.0",
     "webpack-dev-server": "^1.16.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InitechSoftware/accessibility-widget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/InitechSoftware/accessibility-widget/issues"
+  },
+  "homepage": "https://github.com/InitechSoftware/accessibility-widget#readme",
+  "dependencies": {
+    "lodash": "^4.17.4"
   }
 }
