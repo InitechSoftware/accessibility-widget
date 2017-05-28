@@ -25,12 +25,17 @@ class AccessibilityPlugin {
 
     this.constants = {
       configs: {
-        hebrew: configHebrew,
-        english: configEnglish
+        he: configHebrew,
+        'en-US': configEnglish
       }
     };
 
-    this._documetnReadyFunc = (fn, config=configEnglish) => {
+    this._documetnReadyFunc = (fn) => {
+      var language = document.getElementsByTagName("html")[0].lang;
+      if (typeof language === 'undefined') {
+        language = window.navigator.language || window.navigator.userLanguage;
+      }
+      config = this.constants.configs[language] || configEnglish;
       this.setConfig(config);
       if (this._savedClasses.length > 0) {
           this._savedClasses.forEach((className) => this._setClass(className, true));
@@ -143,9 +148,12 @@ class AccessibilityPlugin {
     let target = event.target;
 
     target = target.classList.contains("control") && !!target.dataset.addClass ? target : target.parentNode;
-
     if (target.id === "reset") {
       this.resetConfiguration();
+      const active_icons = document.querySelectorAll('.accessibility-plugin_control.active');
+      active_icons.forEach((element) => {
+        element.classList.remove('active')
+      })
     } else if (target.dataset.addClass !== undefined) {
       this._setClass(target.dataset.addClass);
     }
@@ -153,6 +161,7 @@ class AccessibilityPlugin {
 
   _setClass(classToAdd, fromLocal=false) {
     const styleDefs = OverrideStyles[classToAdd];
+    document.querySelector(`.accessibility-plugin_control[data-add-class=${classToAdd}]`).classList.toggle('active');
     styleDefs.forEach((styleDef) => {
       const elements = document.querySelectorAll(styleDef.elements);
       if(styleDef.hasOwnProperty('enlarge')) {
