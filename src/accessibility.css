@@ -131,7 +131,7 @@ body.high-contrast .accessibility-plugin_wrapper img {
 }
 
 .accessibility-plugin-statement-content {
-  margin: 5%;
+  margin: 10% auto;
   width: 90%;
   border: 2px solid white;
   z-index: 1250;
