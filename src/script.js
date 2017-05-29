@@ -9,7 +9,13 @@ const localStorageKey = 'classes';
 
 class AccessibilityPlugin {
   constructor(config) {
-    let savedClasses = window.localStorage.getItem(localStorageKey);
+
+    if(this._checkLocalStorage()) {
+      var savedClasses = window.localStorage.getItem(localStorageKey);
+    } else {
+      var savedClasses = this._getCookie(localStorageKey)
+    }
+
     this.documentReady;
     this._pluginElement = document.createRange().createContextualFragment(html);
     this._translationKeys = translationKeys;
@@ -70,6 +76,37 @@ class AccessibilityPlugin {
     this._pluginElement.querySelector(".accessibility-plugin_tab").addEventListener("click", this._openTab.bind(this));
 
     return this;
+  }
+
+  _setCookie(name, value, days) {
+    var d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = name + "=" + value + ";" + "expires=" + d.toUTCString() + ";path=/"
+  }
+
+  _getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return null;
+  }
+
+  _checkLocalStorage() {
+    try {
+      localStorage.setItem('localstorage', 'localstorage');
+      localStorage.removeItem('localstorage');
+      return true;
+    } catch(e) {
+      return false;
+    }
   }
 
   setConfig(config) {
@@ -140,7 +177,12 @@ class AccessibilityPlugin {
     );
 
     this._savedClasses = [];
-    window.localStorage.removeItem(localStorageKey);
+    if(this._checkLocalStorage()) {
+      window.localStorage.removeItem(localStorageKey);
+    } else {
+      this._setCookie(localStorageKey, '', 0)
+    }
+
     //TODO: Remove hardcoded jQuery test and add a full sweep over third party libraries
     if ("jQuery" in window || "$" in window) {
       window.jQuery.fx.off = false;
@@ -195,8 +237,12 @@ class AccessibilityPlugin {
     } else {
       this._savedClasses.push(classToAdd);
     }
+    if(this._checkLocalStorage()) {
+      window.localStorage.setItem(localStorageKey, JSON.stringify(this._savedClasses));
+    } else {
+      this._setCookie(localStorageKey, JSON.stringify(this._savedClasses), 1000)
+    }
 
-    window.localStorage.setItem(localStorageKey, JSON.stringify(this._savedClasses));
     //TODO: Remove hardcoded jQuery test and add a full sweep over third party libraries
     if ("jQuery" in window) {
       if (this._savedClasses.includes("disable-animations")) {
