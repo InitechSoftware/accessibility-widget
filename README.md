@@ -18,9 +18,9 @@ Internationalization
 1. Add config for desired language in `src/translations/` folder (i.e russian.json).
 2. In file `src/translations/default.config.js` add variable for your language with corresponding direction (ltr either rlt).
 3. Import declared variable in `src/translations/default.config.js` in `src/script.js` and add it to config in constructor method.
-4. After importing widget to you project you can change translation for widget by calling function translate with desired language.
-```
-    window.AccessibilityPlugin.documentReady = function () {
-        this.changeDirection("ltr").translate(this.constants.configs.russian.translation);
-    };
-```
+
+Now widget has support for English and Hebrew.
+
+#### 3rd party resources
+
+Accessibility widget is build with help of material design icons https://materialdesignicons.com/.
