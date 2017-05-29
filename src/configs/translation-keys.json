@@ -54,5 +54,25 @@
   "reset_configuration_alt": {
     "type": "img",
     "path": "#accessibility-plugin > .accessibility-plugin_control#reset > .accessibility-plugin_img"
+  },
+  "statement_text": {
+    "type": "span",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#statement > .accessibility-plugin_text"
+  },
+  "statement_alt": {
+    "type": "img",
+    "path": "#accessibility-plugin > .accessibility-plugin_control#statement > .accessibility-plugin_img"
+  },
+  "statement_dialog_title": {
+    "type": "h3",
+    "path": ".accessibility-plugin-statement .accessibility-plugin-statement-title"
+  },
+  "statement_dialog_text": {
+    "type": "p",
+    "path": ".accessibility-plugin-statement .accessibility-plugin-statement-text"
+  },
+  "statement_dialog_button": {
+    "type": "button",
+    "path": ".accessibility-plugin-statement .accessibility-plugin-statement-button"
   }
 }

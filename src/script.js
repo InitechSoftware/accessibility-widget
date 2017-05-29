@@ -54,6 +54,7 @@ class AccessibilityPlugin {
   // TODO: Implement appending to element other than `body`
   append(toElement=null) {
     const pluginPath = "#accessibility-plugin";
+    const dialogPath = ".accessibility-plugin-statement";
     let querySelector;
 
     if (toElement !== null && !("querySelector" in toElement)) {
@@ -63,7 +64,9 @@ class AccessibilityPlugin {
     document.body.appendChild(this._pluginElement);
     querySelector = (toElement !== null && !!toElement.querySelector) ? `${pluginPath}` : `body > ${pluginPath}`;
     this._pluginElement = document.querySelector(querySelector);
+    this._dialogElement = document.querySelector(dialogPath);
     this._pluginElement.addEventListener("click", this._accessibilityPluginClicked.bind(this));
+    this._dialogElement.querySelector(".accessibility-plugin-statement-button").addEventListener("click", this._closeDialog.bind(this));
     this._pluginElement.querySelector(".accessibility-plugin_tab").addEventListener("click", this._openTab.bind(this));
 
     return this;
@@ -94,13 +97,13 @@ class AccessibilityPlugin {
       if (this._translationKeys[key]) {
         if (this._translationKeys[key].type == "img") {
           this._pluginElement.querySelector(this._translationKeys[key].path).setAttribute("alt", translationObject[key]);
-        } else if (this._translationKeys[key].type  == "span") {
+        } else if (["span", "p", "h3", "button"].indexOf(this._translationKeys[key].type)  !== -1 ) {
           this._pluginElement.querySelector(this._translationKeys[key].path).textContent = translationObject[key];
         } else {
           console.error(`Unsupported translation type ${this._translationKeys[key].type}`);
         }
       } else {
-        console.error(`Unsupported trnslation key ${key}`);
+        console.error(`Unsupported translation key ${key}`);
       }
     }
 
@@ -150,10 +153,12 @@ class AccessibilityPlugin {
     target = target.classList.contains("control") && !!target.dataset.addClass ? target : target.parentNode;
     if (target.id === "reset") {
       this.resetConfiguration();
-      const active_icons = document.querySelectorAll('.accessibility-plugin_control.active');
+      const active_icons = this._pluginElement.querySelectorAll('.accessibility-plugin_control.active');
       active_icons.forEach((element) => {
         element.classList.remove('active')
       })
+    } else if(target.id === "statement") {
+      this._dialogElement.classList.remove('hidden');
     } else if (target.dataset.addClass !== undefined) {
       this._setClass(target.dataset.addClass);
     }
@@ -161,7 +166,7 @@ class AccessibilityPlugin {
 
   _setClass(classToAdd, fromLocal=false) {
     const styleDefs = OverrideStyles[classToAdd];
-    document.querySelector(`.accessibility-plugin_control[data-add-class=${classToAdd}]`).classList.toggle('active');
+    this._pluginElement.querySelector(`.accessibility-plugin_control[data-add-class=${classToAdd}]`).classList.toggle('active');
     styleDefs.forEach((styleDef) => {
       const elements = document.querySelectorAll(styleDef.elements);
       if(styleDef.hasOwnProperty('enlarge')) {
@@ -235,6 +240,10 @@ class AccessibilityPlugin {
     } else {
       this._pluginElement.classList.add(className);
     }
+  }
+
+  _closeDialog(event) {
+    this._dialogElement.classList.add("hidden")
   }
 }
 
