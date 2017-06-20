@@ -13,7 +13,7 @@ class AccessibilityPlugin {
     if(this._checkLocalStorage()) {
       var savedClasses = window.localStorage.getItem(localStorageKey);
     } else {
-      var savedClasses = this._getCookie(localStorageKey)
+      var savedClasses = this._getCookie(localStorageKey);
     }
 
     this.documentReady;
@@ -263,7 +263,7 @@ class AccessibilityPlugin {
       } else {
         elem.style.removeProperty(attrs_dict['attr']);
       }
-    })
+    });
   }
 
   _setStyle(elements, add=false, style) {
