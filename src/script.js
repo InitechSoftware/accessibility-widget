@@ -81,7 +81,7 @@ class AccessibilityPlugin {
   _setCookie(name, value, days) {
     var d = new Date();
     d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = name + "=" + value + ";" + "expires=" + d.toUTCString() + ";path=/"
+    document.cookie = name + "=" + value + ";" + "expires=" + d.toUTCString() + ";path=/";
   }
 
   _getCookie(cname) {
@@ -166,11 +166,11 @@ class AccessibilityPlugin {
       (className) => {
         OverrideStyles[className].forEach((element) => {
           if(element.hasOwnProperty('enlarge')){
-            this._enlargeProperty(document.querySelectorAll(element.elements), false, element.enlarge)
+            this._enlargeProperty(document.querySelectorAll(element.elements), false, element.enlarge);
           } else {
             this._setStyle(
               document.querySelectorAll(element.elements), false, element.style
-            )
+            );
           }
         });
       }
@@ -180,7 +180,7 @@ class AccessibilityPlugin {
     if(this._checkLocalStorage()) {
       window.localStorage.removeItem(localStorageKey);
     } else {
-      this._setCookie(localStorageKey, '', 0)
+      this._setCookie(localStorageKey, '', 0);
     }
 
     //TODO: Remove hardcoded jQuery test and add a full sweep over third party libraries
@@ -197,8 +197,8 @@ class AccessibilityPlugin {
       this.resetConfiguration();
       const active_icons = this._pluginElement.querySelectorAll('.accessibility-plugin_control.active');
       active_icons.forEach((element) => {
-        element.classList.remove('active')
-      })
+        element.classList.remove('active');
+      });
     } else if(target.id === "statement") {
       this._dialogElement.classList.remove('hidden');
     } else if (target.dataset.addClass !== undefined) {
@@ -240,7 +240,7 @@ class AccessibilityPlugin {
     if(this._checkLocalStorage()) {
       window.localStorage.setItem(localStorageKey, JSON.stringify(this._savedClasses));
     } else {
-      this._setCookie(localStorageKey, JSON.stringify(this._savedClasses), 1000)
+      this._setCookie(localStorageKey, JSON.stringify(this._savedClasses), 1000);
     }
 
     //TODO: Remove hardcoded jQuery test and add a full sweep over third party libraries
@@ -289,7 +289,7 @@ class AccessibilityPlugin {
   }
 
   _closeDialog(event) {
-    this._dialogElement.classList.add("hidden")
+    this._dialogElement.classList.add("hidden");
   }
 }
 
