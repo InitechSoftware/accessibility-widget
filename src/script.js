@@ -135,7 +135,7 @@ class AccessibilityPlugin {
         if (this._translationKeys[key].type == "img") {
           this._pluginElement.querySelector(this._translationKeys[key].path).setAttribute("alt", translationObject[key]);
         } else if (["span", "p", "h3", "button"].indexOf(this._translationKeys[key].type)  !== -1 ) {
-          this._pluginElement.querySelector(this._translationKeys[key].path).textContent = translationObject[key];
+          this._pluginElement.querySelector(this._translationKeys[key].path).innerHTML = translationObject[key];
         } else {
           console.error(`Unsupported translation type ${this._translationKeys[key].type}`);
         }
