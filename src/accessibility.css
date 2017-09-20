@@ -13,6 +13,7 @@
   transition: left 0.5s, right 0.5s;
   background: #FFF;
   z-index: 1;
+  font-size: 22px;
 }
 
 .accessibility-plugin_wrapper.open {
@@ -131,13 +132,14 @@ body.high-contrast .accessibility-plugin_wrapper img {
 }
 
 .accessibility-plugin-statement-content {
+  box-sizing: border-box;
   margin: 10% auto;
   width: 90%;
   border: 2px solid white;
   z-index: 1250;
   background-color: #4157af;
   color: white;
-  padding: 10px;
+  padding: 40px;
   border-radius: 5px;
 }
 
@@ -152,12 +154,18 @@ body.high-contrast .accessibility-plugin_wrapper img {
 
 .accessibility-plugin-statement-title {
   text-align: center;
-  font-size: 2em;
+  font-size: 2.4em;
 }
 
 .accessibility-plugin-statement-text {
   text-indent: 20px;
   word-spacing: 1px;
+  font-size: 2em;
+}
+
+.accessibility-plugin-statement-text a {
+  color: #f2f990;
+  text-decoration: underline;
 }
 
 .accessibility-plugin-statement-button-container {
