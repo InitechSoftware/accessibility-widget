@@ -5,14 +5,15 @@
 #### GET started:
 
 1. Get the code (clone repo) `git clone git@github.com:InitechSoftware/accessibility-widget.git`
-2. `npm i`
-3. `npm run build` (to get lastest build, there is a good chance the build directory will not be updat to date)
-4. Bundle the `js` file with you code, also, the basic implmentation is exported and can be called by - `import AccessibilityPlugin from 'AccessibilityPlugin';` or `require('AccessibilityPlugin');`.
-5. Add the build and source map to your project.
-6. Optional you can include widget in your project via submodule
-https://github.com/blog/2104-working-with-submodules
+2. `npm i`, install node_modules.
+3. `npm run build`, to get lastest build, there is a good chance the build directory will not be up to date.
+4. Add the build and source map to your project.
 
-#### Internationalization 
+#### Inheriting and extending.
+In the src directory, the module could be imported by - `import AccessibilityPlugin from 'AccessibilityPlugin';` or `require('AccessibilityPlugin');`.
+You can inherit from the `AccessibilityPlugin` class and easily extend it.
+
+#### Internationalization
 
 Internationalization
 1. Add config for desired language in `src/translations/` folder (i.e russian.json).
